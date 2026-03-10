@@ -1,0 +1,77 @@
+{
+  "RuleName": "SqlUser_to_AdUser",
+  "InputEntityRef": "SqlUser",
+  "OutputEntityRef": "AdUser",
+  "InputObjectType": "User",
+  "OutputObjectType": "User",
+
+  "JoinCondition": "$empId = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'employeeId'; $empId",
+
+  "EntitlementCondition": "$isEnabled = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'isEnabled'; $dept = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'department'; [bool]$isEnabled -and -not [string]::IsNullOrWhiteSpace($dept)",
+
+  "ExistenceCheck": null,
+
+  "DeprovisionOnDisentitle": true,
+
+  "ColumnMappings": [
+    {
+      "Type": "Direct",
+      "SourceAttribute": "employeeId",
+      "TargetAttribute": "employeeId",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "Direct",
+      "SourceAttribute": "displayName",
+      "TargetAttribute": "displayName",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "Direct",
+      "SourceAttribute": "mail",
+      "TargetAttribute": "mail",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "Direct",
+      "SourceAttribute": "department",
+      "TargetAttribute": "department",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "Direct",
+      "SourceAttribute": "title",
+      "TargetAttribute": "title",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "PowerShell",
+      "TargetAttribute": "sAMAccountName",
+      "Expression": "$fn = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'firstName'; $ln = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'lastName'; if ($fn -and $ln) { ($fn.Substring(0,1) + $ln).ToLower() -replace '[^a-z0-9]','' } else { $null }",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "PowerShell",
+      "TargetAttribute": "userPrincipalName",
+      "Expression": "$mail = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'mail'; $mail",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "PowerShell",
+      "TargetAttribute": "cn",
+      "Expression": "$dn = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'displayName'; $dn",
+      "MergeSemantics": "Replace"
+    },
+    {
+      "Type": "PowerShell",
+      "TargetAttribute": "memberOf",
+      "Expression": "@('CN=AllUsers,OU=Groups,DC=corp,DC=local')",
+      "MergeSemantics": "Merge"
+    }
+  ],
+
+  "ConflictStrategy": {
+    "DefaultPrecedence": 10,
+    "AttributeOverrides": {}
+  }
+}

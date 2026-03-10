@@ -1,0 +1,22 @@
+{
+  "ConnectorName": "AdTarget",
+  "ConnectorType": "ActiveDirectory",
+  "PluginPath": "../../src/Plugins/ActiveDirectory/connector-plugin.ps1",
+  "Connection": {
+    "Server": "",
+    "Domain": "corp.local",
+    "UseIntegrated": true,
+    "CredentialRef": null
+  },
+  "Capabilities": {
+    "supportsDeltaByTimestamp": true,
+    "supportsDeltaByToken": true,
+    "supportsAttributeCrud": true,
+    "supportsSoftDelete": true
+  },
+  "Defaults": {
+    "RetryCount": 3,
+    "RetryDelaySeconds": 2,
+    "PageSize": 500
+  }
+}
