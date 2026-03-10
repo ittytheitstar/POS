@@ -1,0 +1,24 @@
+{
+  "ConnectorName": "EngineDb",
+  "ConnectorType": "MSSQL",
+  "PluginPath": "../../src/Plugins/MSSQL/connector-plugin.ps1",
+  "Connection": {
+    "Server": "localhost\\SQLEXPRESS",
+    "Database": "ObjectSyncEngine",
+    "IntegratedSecurity": true,
+    "PasswordEnvVar": null,
+    "Username": null,
+    "Password": null
+  },
+  "Capabilities": {
+    "supportsDeltaByTimestamp": false,
+    "supportsDeltaByToken": false,
+    "supportsAttributeCrud": true,
+    "supportsSoftDelete": false
+  },
+  "Defaults": {
+    "RetryCount": 3,
+    "RetryDelaySeconds": 2,
+    "PageSize": 1000
+  }
+}

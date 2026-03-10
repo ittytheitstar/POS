@@ -1,0 +1,143 @@
+{
+  "EntityName": "AdUser",
+  "ObjectType": "User",
+  "ObjectFriendlyName": "Active Directory User",
+  "ConnectorRef": "AdTarget",
+  "ExternalIdAttribute": "employeeId",
+  "ConnectorMetadata": {
+    "SearchBase": "OU=SyncedUsers,DC=corp,DC=local",
+    "ObjectClass": "user",
+    "PageSize": 500,
+    "LdapFilter": ""
+  },
+  "AnchorDefinition": {
+    "AttributeName": "objectGUID",
+    "Strategy": "AdGuid"
+  },
+  "DeltaStrategy": {
+    "Type": "Token",
+    "TokenAttribute": "uSNChanged"
+  },
+  "Attributes": [
+    {
+      "AttributeName": "objectGUID",
+      "AttributeFriendlyName": "Object GUID",
+      "DataType": "guid",
+      "IsMultiValued": false,
+      "IsKey": true,
+      "ConnectorMetadata": {
+        "LdapAttribute": "objectGUID",
+        "IsAnchor": true
+      }
+    },
+    {
+      "AttributeName": "sAMAccountName",
+      "AttributeFriendlyName": "SAM Account Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "sAMAccountName"
+      }
+    },
+    {
+      "AttributeName": "userPrincipalName",
+      "AttributeFriendlyName": "User Principal Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "userPrincipalName"
+      }
+    },
+    {
+      "AttributeName": "displayName",
+      "AttributeFriendlyName": "Display Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "displayName"
+      }
+    },
+    {
+      "AttributeName": "mail",
+      "AttributeFriendlyName": "Email Address",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "mail"
+      }
+    },
+    {
+      "AttributeName": "employeeId",
+      "AttributeFriendlyName": "Employee ID",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "employeeID"
+      }
+    },
+    {
+      "AttributeName": "department",
+      "AttributeFriendlyName": "Department",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "department"
+      }
+    },
+    {
+      "AttributeName": "title",
+      "AttributeFriendlyName": "Job Title",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "title"
+      }
+    },
+    {
+      "AttributeName": "cn",
+      "AttributeFriendlyName": "Common Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "cn"
+      }
+    },
+    {
+      "AttributeName": "memberOf",
+      "AttributeFriendlyName": "Group Memberships",
+      "DataType": "string",
+      "IsMultiValued": true,
+      "ConnectorMetadata": {
+        "LdapAttribute": "memberOf"
+      }
+    },
+    {
+      "AttributeName": "userAccountControl",
+      "AttributeFriendlyName": "User Account Control",
+      "DataType": "int",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "userAccountControl"
+      }
+    },
+    {
+      "AttributeName": "whenChanged",
+      "AttributeFriendlyName": "When Changed",
+      "DataType": "datetime",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "whenChanged",
+        "IsTimestamp": true
+      }
+    },
+    {
+      "AttributeName": "uSNChanged",
+      "AttributeFriendlyName": "USN Changed",
+      "DataType": "int",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "LdapAttribute": "uSNChanged"
+      }
+    }
+  ]
+}

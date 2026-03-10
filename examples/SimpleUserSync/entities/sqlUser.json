@@ -1,0 +1,128 @@
+{
+  "EntityName": "SqlUser",
+  "ObjectType": "User",
+  "ObjectFriendlyName": "HR Database User",
+  "ConnectorRef": "SqlSource",
+  "ExternalIdAttribute": "employeeId",
+  "FriendlyNameColumn": "displayName",
+  "CreatedColumnName": "createdDate",
+  "ModifiedColumnName": "modifiedDate",
+  "ConnectorMetadata": {
+    "TableName": "dbo.Users",
+    "PageSize": 1000
+  },
+  "AnchorDefinition": {
+    "AttributeName": "employeeId",
+    "Strategy": "SqlPrimaryKey"
+  },
+  "DeltaStrategy": {
+    "Type": "Timestamp",
+    "TimestampAttribute": "modifiedDate"
+  },
+  "Attributes": [
+    {
+      "AttributeName": "employeeId",
+      "AttributeFriendlyName": "Employee ID",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "IsKey": true,
+      "ConnectorMetadata": {
+        "ColumnName": "EmployeeId",
+        "IsAnchor": true,
+        "IsTimestamp": false
+      }
+    },
+    {
+      "AttributeName": "firstName",
+      "AttributeFriendlyName": "First Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "FirstName"
+      }
+    },
+    {
+      "AttributeName": "lastName",
+      "AttributeFriendlyName": "Last Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "LastName"
+      }
+    },
+    {
+      "AttributeName": "displayName",
+      "AttributeFriendlyName": "Display Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "DisplayName"
+      }
+    },
+    {
+      "AttributeName": "mail",
+      "AttributeFriendlyName": "Email Address",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "Email"
+      }
+    },
+    {
+      "AttributeName": "department",
+      "AttributeFriendlyName": "Department",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "Department"
+      }
+    },
+    {
+      "AttributeName": "title",
+      "AttributeFriendlyName": "Job Title",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "Title"
+      }
+    },
+    {
+      "AttributeName": "isEnabled",
+      "AttributeFriendlyName": "Account Enabled",
+      "DataType": "bool",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "IsEnabled"
+      }
+    },
+    {
+      "AttributeName": "modifiedDate",
+      "AttributeFriendlyName": "Modified Date",
+      "DataType": "datetime",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "ModifiedDate",
+        "IsTimestamp": true
+      }
+    },
+    {
+      "AttributeName": "createdDate",
+      "AttributeFriendlyName": "Created Date",
+      "DataType": "datetime",
+      "IsMultiValued": false,
+      "ConnectorMetadata": {
+        "ColumnName": "CreatedDate"
+      }
+    },
+    {
+      "AttributeName": "userPrincipalName",
+      "AttributeFriendlyName": "User Principal Name",
+      "DataType": "string",
+      "IsMultiValued": false,
+      "Calculated": {
+        "Type": "PowerShell",
+        "Expression": "$mail = Get-RenderedObjectSingleValue -RenderedObject $InObject -AttributeName 'mail'; if ($mail) { $mail } else { $null }"
+      }
+    }
+  ]
+}

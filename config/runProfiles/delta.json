@@ -1,0 +1,29 @@
+{
+  "ProfileName": "Delta",
+  "Description": "Delta import using watermarks/tokens, then incremental join, transform, export.",
+  "LogLevel": "Info",
+  "Steps": [
+    {
+      "Action": "ImportDelta",
+      "Description": "Delta import for all entities since last run",
+      "Entities": ["SqlUser", "AdUser"]
+    },
+    {
+      "Action": "Stage",
+      "Description": "Stage/update engine object state"
+    },
+    {
+      "Action": "Join",
+      "Description": "Update metaverse join links for changed objects"
+    },
+    {
+      "Action": "Transform",
+      "Description": "Evaluate calculated attributes on changed objects"
+    },
+    {
+      "Action": "Export",
+      "Description": "Export changes to target connectors",
+      "SyncRules": ["SqlUser_to_AdUser"]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "ProfileName": "Full",
+  "Description": "Full import from all connectors, then join, transform, and export.",
+  "LogLevel": "Info",
+  "Steps": [
+    {
+      "Action": "ImportFull",
+      "Description": "Full import of all entities",
+      "Entities": ["SqlUser", "AdUser"]
+    },
+    {
+      "Action": "Stage",
+      "Description": "Stage imported objects into engine state (update checksums)"
+    },
+    {
+      "Action": "Join",
+      "Description": "Build/update metaverse join links"
+    },
+    {
+      "Action": "Transform",
+      "Description": "Evaluate calculated attributes"
+    },
+    {
+      "Action": "Export",
+      "Description": "Apply sync rules and export changes",
+      "SyncRules": ["SqlUser_to_AdUser"]
+    }
+  ]
+}
